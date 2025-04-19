@@ -12,8 +12,6 @@ for _, scriptPath in ipairs(potentialOldKeybindScripts) do
             return [=[if type(input) == "function" then]=]
         end)
         if replacedOld then
-            assets.erase(scriptPath)
-            assets.add(scriptPath, scriptFile)
             if assets.origin and assets.sourceMetadata then -- Hopefully oSB gets a metadata callback soon.
                 local originPath = assets.origin(scriptPath)
                 local sourceMetadata = assets.sourceMetadata(originPath)
@@ -34,6 +32,8 @@ for _, scriptPath in ipairs(potentialOldKeybindScripts) do
             else
                 sb.logInfo("[Keybind Patch] Patched old Silverfeelin keybind script at '%s'", scriptPath)
             end
+            assets.erase(scriptPath)
+            assets.add(scriptPath, scriptFile)
         end
     end
 end
